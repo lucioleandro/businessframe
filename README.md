@@ -1,8 +1,8 @@
 ## Businessframe
 
-Simple project to teatch Javascript.
+Simple project to teach Javascript.
 
-With this project is possible to teatch about:
+With this project is possible to teach about:
 
 - Junction between object-oriented and functional paradigm to solve problems
 
@@ -16,7 +16,7 @@ With this project is possible to teatch about:
 
 - data binding
 
-- Date Storing with IndexedDB
+- Data Storing with IndexedDB
 
 - Fettch API
 
