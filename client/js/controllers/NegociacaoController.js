@@ -15,10 +15,26 @@ class NegociacaoController {
 
     create(event) {
         event.preventDefault();
-        this._listaNegociacoes.add(this._createBusiness());
+        ConnectionFactory.getConnection()
+            .then(connection => {
+                let negociacao = this._createBusiness()
+                new NegociacaoDao(connection)
+                    .save(negociacao)
+                    .then(() => {
+                        this._listaNegociacoes.add(negociacao);
+                        this._mensagem.texto = 'Negociação adicionada com sucesso';
+                        this._clearForm();
+                    });
+            }).catch(error => this._mensagem = error);
 
-        this._mensagem.texto = 'Negociação adicionada com sucesso';
-        this._clearForm();
+
+
+        //Coding before IndexedDB integration
+        /* event.preventDefault();
+        // this._listaNegociacoes.add(this._createBusiness());
+
+        // this._mensagem.texto = 'Negociação adicionada com sucesso';
+           this._clearForm();*/
     }
 
     clearList() {
@@ -49,8 +65,8 @@ class NegociacaoController {
     _createBusiness() {
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
-            this._inputQuantidade.value,
-            this._inputValor.value
+            parseInt(this._inputQuantidade.value),
+            parseFloat(this._inputValor.value)
           );
     }
 
