@@ -7,7 +7,7 @@ class NegociacaoController {
         this._inputValor = $('#valor');
 
         this._listaNegociacoes = new Bind(new ListaNegociacoes(), 
-            new NegociacoesView($('#negociacoesView')),'add', 'addList', 'clearList');
+            new NegociacoesView($('#negociacoesView')),'add', 'addList', 'clear');
         
         this._mensagem = new Bind(new Mensagem, new MensagemView($('#mensagem')), 'texto');
 
@@ -39,8 +39,22 @@ class NegociacaoController {
     }
 
     clearList() {
+        if(!this._listaNegociacoes.negociacoes.length) {
+            return;
+        }
+
+        ConnectionFactory.getConnection()
+        .then(connection => {
+            new NegociacaoDao(connection).deleteAll()
+                .then((message) => {
+                    this._listaNegociacoes.clear();
+                    this._mensagem.texto = message;
+                });
+        }).catch(error => {
+            console.log(error);
+            this._mensagem.texto = error;
+        });
         this._listaNegociacoes.clear();
-        this._mensagem.texto = 'Lista apagada com sucesso';
     }
 
     importBusiness() {
@@ -76,6 +90,9 @@ class NegociacaoController {
             .then(connection => {
                 new NegociacaoDao(connection).findAll()
                     .then(negociacoes => this._listaNegociacoes.addList(negociacoes));
+            }).catch(error => {
+                console.log(error);
+                this._mensagem.texto = error;
             });
     }
 
