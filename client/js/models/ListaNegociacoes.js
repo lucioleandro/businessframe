@@ -8,6 +8,10 @@ class ListaNegociacoes {
         this._negociacoes.push(negociacao);
     }
 
+    addList(negociacoes) {
+        this._negociacoes = [].concat(this._negociacoes, negociacoes);
+    }
+
     clear() {
         this._negociacoes = [];
     }

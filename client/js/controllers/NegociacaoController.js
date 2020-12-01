@@ -2,15 +2,16 @@ class NegociacaoController {
 
     constructor() {
         let $ = document.querySelector.bind(document);
-        let self = this;
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
 
         this._listaNegociacoes = new Bind(new ListaNegociacoes(), 
-            new NegociacoesView($('#negociacoesView')),'add', 'clearList');
+            new NegociacoesView($('#negociacoesView')),'add', 'addList', 'clearList');
         
         this._mensagem = new Bind(new Mensagem, new MensagemView($('#mensagem')), 'texto');
+
+        this._getAllBusiness();
     }
 
     create(event) {
@@ -68,6 +69,14 @@ class NegociacaoController {
             parseInt(this._inputQuantidade.value),
             parseFloat(this._inputValor.value)
           );
+    }
+
+    _getAllBusiness() {
+        ConnectionFactory.getConnection()
+            .then(connection => {
+                new NegociacaoDao(connection).findAll()
+                    .then(negociacoes => this._listaNegociacoes.addList(negociacoes));
+            });
     }
 
     _clearForm() {
