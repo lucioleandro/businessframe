@@ -26,6 +26,15 @@ class HttpService {
         // })
     }
 
+    post(url, data) {
+        return fetch(url, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'post',
+            body: JSON.stringify(data)
+        })
+        .then(res => this._handleErrors(res));
+}
+
     _handleErrors(res) {
         if(!res.ok) throw new Error(res.statusText);
 
