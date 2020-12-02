@@ -9,5 +9,6 @@ class Mensagem {
 
     set texto(texto) {  
         this._texto = texto;
+        setInterval(() => this.texto = '', 5000);
     }
 }

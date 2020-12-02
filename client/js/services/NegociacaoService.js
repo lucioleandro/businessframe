@@ -27,7 +27,7 @@ class NegociacaoService {
         return ConnectionFactory.getConnection()
                 .then(connection => new NegociacaoDao(connection))
                 .then(dao => dao.deleteAll())
-                .then(() => 'Negociaççoes apagadas com sucesso!')
+                .then(() => 'Negociaçoes apagadas com sucesso!')
                 .catch(error => {
                     console.log(error);
                     throw new Error('Não foi possível apagar as negociações');
