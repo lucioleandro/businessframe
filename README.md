@@ -27,7 +27,7 @@ With this project is possible to teach about:
 - and so on.
 
 
-### Some informations to remember me
+### Some information i need to remember
 
 The project contains 3 tags:
 
