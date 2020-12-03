@@ -10,7 +10,7 @@ With this project is possible to teach about:
 
 - Application of new features of Ecmascript 6.
 
-- Proxy and Factory pattern.
+- Proxy, Factory and Module Pattern.
 
 - promises and call back functions.
 
@@ -20,4 +20,8 @@ With this project is possible to teach about:
 
 - Fettch API.
 
+- Auto invoked function
+
 - Babel.
+
+- and so on
