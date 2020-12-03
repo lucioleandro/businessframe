@@ -14,7 +14,7 @@ With this project is possible to teach about:
 
 - promises and call back functions.
 
-- data binding.
+- Data binding.
 
 - Data Storing with IndexedDB.
 
